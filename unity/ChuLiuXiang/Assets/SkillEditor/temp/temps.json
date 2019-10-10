@@ -1,0 +1,243 @@
+{
+	"propertys": {
+		"type": {
+			"type": "list",
+			"defalut": 0,
+			"items": [
+				"玩家",
+				"NPC",
+				"怪物"
+			],
+			"tip": "类型"
+		},
+		"hp": {
+			"type": "int",
+			"defalut": 100,
+			"tip": "血量"
+		},
+		"mp": {
+			"type": "int",
+			"defalut": 100,
+			"tip": "魔法值"
+		},
+		"name": {
+			"type": "string",
+			"defalut": "貂蝉",
+			"tip": "名称"
+		}
+	},
+	"event": {
+		"hp": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "HP伤害"
+		},
+		"mp": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "MP伤害"
+		},
+		"hp_p": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "角色物攻加成%"
+		},
+		"mp_p": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "角色法伤加成%"
+		},
+		"status": {
+			"type": "list",
+			"defalut": 0,
+			"items": [
+				"无",
+				"击飞",
+				"眩晕",
+				"击退",
+				"击落"
+			],
+			"tip": "附加状态"
+		},
+		"ctrl_time": {
+			"type": "float",
+			"defalut": 0,
+			"tip": "晕眩",
+			"limit": "status",
+			"limit_items": [
+				1,
+				2,
+				3,
+				4
+			]
+		},
+		"hit_back": {
+			"type": "float",
+			"defalut": 10,
+			"tip": "击退速度",
+			"limit": "status",
+			"limit_items": [
+				1,
+				3,
+				4
+			]
+		},
+		"hit_back_time": {
+			"type": "float",
+			"defalut": 0.2,
+			"tip": "击退时间",
+			"limit": "status",
+			"limit_items": [
+				1,
+				3
+			]
+		},
+		"hit_down": {
+			"type": "float",
+			"defalut": 10,
+			"tip": "击落速度",
+			"limit": "status",
+			"limit_items": [
+				4
+			]
+		},
+		"hit_fly": {
+			"type": "float",
+			"defalut": 3,
+			"tip": "击飞高度",
+			"limit": "status",
+			"limit_items": [
+				1
+			]
+		},
+		"slow_motion": {
+			"type": "float",
+			"defalut": 0,
+			"tip": "动作停滞"
+		},
+		"air_delay": {
+			"type": "float",
+			"defalut": 0.05,
+			"tip": "空中击中停滞",
+			"limit": "status",
+			"limit_items": [
+				2,
+				3
+			]
+		},
+		"reacting_force": {
+			"type": "float",
+			"defalut": 0,
+			"tip": "反震距离"
+		},
+		"reacting_force_time": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "反震时长（十分一秒）"
+		},
+		"hit_sound": {
+			"type": "sound",
+			"defalut": 0,
+			"tip": "打击声音"
+		},
+		"hit_effect": {
+			"type": "effect",
+			"defalut": "",
+			"tip": "受击特效"
+		},
+		"hit_dir": {
+			"type": "list",
+			"defalut": 0,
+			"items": [
+				"Z方向",
+				"碰撞体中心->敌人",
+				"角色中心->敌人",
+				"敌人->角色中心"
+			],
+			"tip": "击飞方向"
+		},
+		"IsFlyTool": {
+			"type": "list",
+			"defalut": 0,
+			"type_limit": "3",
+			"items": [
+				"否",
+				"直线飞行道具",
+				"追踪飞行道具"
+			],
+			"tip": "是否飞行道具"
+		},
+		"FlyToolSpeed": {
+			"type": "float",
+			"defalut": 10,
+			"limit": "IsFlyTool",
+			"limit_items": [
+				1,
+				2
+			],
+			"tip": "飞行道具速度"
+		},
+		"FlyToolTime": {
+			"type": "float",
+			"defalut": 2,
+			"limit": "IsFlyTool",
+			"limit_items": [
+				1
+			],
+			"tip": "飞行道具存在时长"
+		}
+	},
+	"object": {
+		"enable": {
+			"type": "bool",
+			"defalut": true,
+			"tip": "激活状态"
+		},
+		"anim": {
+			"type": "anim",
+			"defalut": "",
+			"tip": "播放动作"
+		},
+		"crossFade": {
+			"type": "bool",
+			"defalut": true,
+			"tip": "动作混合"
+		},
+		"ex_action": {
+			"type": "list",
+			"defalut": 0,
+			"items": [
+				"无",
+				"坐标系移动向目标(主角才有效)",
+				"停止更新位置"
+			],
+			"tip": "特殊行为"
+		},
+		"ToTargetTime": {
+			"type": "float",
+			"defalut": 0.1,
+			"tip": "移动到目标点用时",
+			"limit": "ex_action",
+			"limit_items": [
+				1
+			]
+		}
+	},
+	"role_state": {
+		"role_state": {
+			"type": "list",
+			"defalut": 0,
+			"items": [
+				"无",
+				"无敌",
+				"霸体"
+			],
+			"tip": "自身buff"
+		},
+		"role_state_time": {
+			"type": "int",
+			"defalut": 0,
+			"tip": "buff时长（十分一秒）"
+		}
+	}
+}

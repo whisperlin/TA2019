@@ -16,9 +16,11 @@ public class LCharacterFellowCamera : MonoBehaviour {
     public float distanceDelta = 10f;
     public float RotDelta = 45;
 
+    public float minDistance = 1f;
     float cur_distance = 10f;
     float cur_xRot = 45f;
     float cur_yRot = 30f;
+    
 
     public bool slowly = true;
     public static bool notUpdateCamera = false;
@@ -70,7 +72,9 @@ public class LCharacterFellowCamera : MonoBehaviour {
     static Transform cmp;
     public void GoToTarget()
     {
-        
+
+        if (distance < minDistance)
+            distance = minDistance;
         //确保大于0f.
         if (distanceDelta < 0.001f)
             distanceDelta = 0.001f;
@@ -82,9 +86,7 @@ public class LCharacterFellowCamera : MonoBehaviour {
 
         if (yRot < -90f)
             yRot = -90f;
-
-
-
+ 
         cur_distance = MoveToLerp(distance, cur_distance, Time.deltaTime * distanceDelta);
         if (slowly)
         {
@@ -101,6 +103,14 @@ public class LCharacterFellowCamera : MonoBehaviour {
     }
     public void SetToTarget()
     {
+        if (distance < minDistance)
+            distance = minDistance;
+        if (yRot > 90f)
+            yRot = 90f;
+
+        if (yRot < -90f)
+            yRot = -90f;
+
         cur_distance = distance;
         cur_xRot = xRot;
         cur_yRot = yRot;
@@ -127,20 +137,7 @@ public class LCharacterFellowCamera : MonoBehaviour {
             return;
 
         
-        /*if (null == sphereCollider)
-        {
-            GameObject g = new GameObject("ForEvent");
-            sphereCollider = g.AddComponent<SphereCollider>();
-            sphereCollider.isTrigger = true;
-            g.transform.parent = target;
-            Rigidbody r = g.AddComponent<Rigidbody>();
-            r.isKinematic = true;
-            r.useGravity = false;
-            g.layer = eventLayer;
-            SimpleTarget st = g.AddComponent<SimpleTarget>();
-            st.sfc = this;
-            g.transform.localPosition = Vector3.zero;
-        }*/
+       
         GoToTarget();
 
         if (null != target.parent)
@@ -155,8 +152,8 @@ public class LCharacterFellowCamera : MonoBehaviour {
             g.hideFlags = HideFlags.HideAndDontSave;
             cmp = g.transform;
         }
-
-        cmp.position = target.position+ offset;
+        Vector3 pos0 = target.position + offset; 
+        cmp.position = pos0;
         cmp.rotation = Quaternion.identity;
         cmp.Rotate(Vector3.up, cur_xRot );
         cmp.Rotate(Vector3.right, cur_yRot);
@@ -165,16 +162,23 @@ public class LCharacterFellowCamera : MonoBehaviour {
 
         if (moveCameraBack > 0f)
         {
- 
             cam.position = Vector3.MoveTowards(cam.position, cmp.position, 0.1f);
             cam.rotation = Quaternion.RotateTowards(cam.rotation, cmp.rotation, RotDelta * 0.0175f);
             moveCameraBack -= Time.deltaTime;
- 
         }
         else
         {
             cam.position = cmp.position;
             cam.forward = cmp.forward;
+
+
+            RaycastHit hit;
+            if (Physics.Raycast(new Ray(pos0, -cmp.forward), out hit, cur_distance, PhysicesData.ground))
+            {
+                float d = hit.distance - 0.5f;
+                d = Mathf.Max(d, 0.5f);
+                cam.position = pos0 + d * -cmp.forward;
+            }
         }
        
     }

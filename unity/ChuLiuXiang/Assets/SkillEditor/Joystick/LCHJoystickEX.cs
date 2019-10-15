@@ -21,24 +21,28 @@ public class LCHJoystickEX : MonoBehaviour ,/*IPointerDownHandler,IPointerUpHand
     Vector2 beginPos;
     public float radius = 50f;
 
-    void Start()
+
+
+    public void UpdateScreenSize(int w,int h)
     {
         if (null != panel)
         {
             if (width < 0.001f)
             {
-                panel.rectTransform.sizeDelta = new Vector2(Screen.height * height, Screen.height * height);
+                panel.rectTransform.sizeDelta = new Vector2(h * height, h * height);
             }
             else
             {
-                panel.rectTransform.sizeDelta = new Vector2(Screen.width * width, Screen.height * height);
+                panel.rectTransform.sizeDelta = new Vector2(w * width, h * height);
             }
-           
-            background.rectTransform.sizeDelta = new Vector2(Screen.height * backgroundHeight, Screen.height * backgroundHeight);
-            button.rectTransform.sizeDelta = new Vector2(Screen.height * buttonHeight, Screen.height * buttonHeight);
+            background.rectTransform.sizeDelta = new Vector2(h * backgroundHeight, h * backgroundHeight);
+            button.rectTransform.sizeDelta = new Vector2(h * buttonHeight, h * buttonHeight);
         }
-       
-
+    }
+    void Start()
+    {
+ 
+        //UpdateScreenSize(Screen.width, Screen.height);
         background.gameObject.SetActive(false);
     }
     

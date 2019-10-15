@@ -105,6 +105,7 @@ Shader "TA/CharactorAlpha"
 			//#pragma multi_compile _ISSUN_ON  _ISSUN_OFF
 			#pragma multi_compile _ISS3_OFF _ISS3_ON _ISS3_BACK
 			//#pragma  multi_compile  _VIRTUAL_LIGHT_ON _VIRTUAL_LIGHT_OFF  _VIRTUAL_LIGHT_SHADOW2
+			#pragma  multi_compile  _ _SCENE_SHADOW2
 			#define _VIRTUAL_LIGHT_ON 1
 
 			#pragma shader_feature S_BAKE

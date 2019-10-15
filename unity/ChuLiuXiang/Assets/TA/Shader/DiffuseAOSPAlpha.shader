@@ -130,6 +130,8 @@ Shader "TA/BumpedAOSpecularAlpha"
 		#define   ENABLE_DISTANCE_ENV 1 // #pragma   multi_compile  _ ENABLE_DISTANCE_ENV
 		//#pragma   multi_compile  _ ENABLE_BACK_LIGHT
 
+		#pragma  multi_compile  _ _SCENE_SHADOW2
+
  		#define _AO_ON 1
  		 
  		#define _ISWEATHER_ON 1

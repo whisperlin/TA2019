@@ -1,4 +1,4 @@
-#define _Fast_PP 
+//#define _Fast_PP 
 using System;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
@@ -125,11 +125,11 @@ namespace UnityEngine.PostProcessing
 
            
         }
-		// && !UNITY_EDITOR
+        // && !UNITY_EDITOR
 
-#if !UNITY_EDITOR 
+#if _Fast_PP
 
-		RenderTexture myRenderTexture;
+        RenderTexture myRenderTexture;
 		void OnPreRender()
 		{
 

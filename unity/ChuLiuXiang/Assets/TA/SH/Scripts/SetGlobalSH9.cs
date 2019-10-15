@@ -338,7 +338,12 @@ public class SetGlobalSH9 : MonoBehaviour {
         Shader.SetGlobalColor("_BackColor", _BackColor);
         Shader.SetGlobalFloat("sss_scatter0", sss_scatter0);
         Shader.SetGlobalFloat("_CullSepe", _CullSepe);
-        
+
+
+
+        //var v3 = Matrix4x4.TRS(Vector3.zero, Quaternion.Euler(new Vector3(0f,140f, 0f)), Vector3.one).MultiplyVector(Vector3.back);
+        //v3.Normalize();
+        //Debug.LogError(_BackColor);
 
         /*if (heightFog)
         {
@@ -351,10 +356,10 @@ public class SetGlobalSH9 : MonoBehaviour {
         {
             Shader.DisableKeyword("_HEIGHT_FOG_ON");
         }*/
-        
 
 
 
 
-}
+
+    }
 }
